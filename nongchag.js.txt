@@ -1,0 +1,52 @@
+// 创建 Phaser 游戏实例
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+// 预加载游戏所需的资源
+function preload() {
+    game.load.image('background', 'assets/background.jpg'); // 背景图像
+    game.load.image('seed', 'assets/seed.png'); // 种子图像
+    game.load.image('food', 'assets/food.png'); // 食物图像
+    game.load.image('statue', 'assets/statue.png'); // 雕像图像
+}
+
+// 创建游戏中的对象和元素
+function create() {
+    // 添加背景
+    var bg = game.add.sprite(0, 0, 'background');
+    bg.width = game.width;
+    bg.height = game.height;
+
+    // 添加商城元素
+    var shop = game.add.group();
+    var seedBtn = game.add.sprite(50, 50, 'seed');
+    shop.add(seedBtn);
+    var sellBtn = game.add.sprite(150, 50, 'seed');
+    shop.add(sellBtn);
+
+    // 添加收藏大厅元素
+    var collection = game.add.group();
+    var statueBtn = game.add.sprite(250, 50, 'statue');
+    collection.add(statueBtn);
+
+    // 添加种植元素
+    var farm = game.add.group();
+    var crops = []; // 储存种植物的数组
+    var cropCount = 6; // 初始可种植的数量
+    for (var i = 0; i < cropCount; i++) {
+        var crop = game.add.sprite(100 + i * 100, 400, 'seed');
+        farm.add(crop);
+        crops.push(crop);
+    }
+
+    // 添加解锁元素
+    var unlock = game.add.group();
+    var unlockBtn = game.add.sprite(50, 200, 'food');
+    unlock.add(unlockBtn);
+    var unlockText = game.add.text(100, 200, 'Unlock a Crop Bed for 5 Coins', { font: '24px Arial', fill: '#ffffff' });
+    unlock.add(unlockText);
+}
+
+// 更新游戏状态
+function update() {
+    // TODO: 添加游戏逻辑，如处理用户输入、更新游戏数据等。
+}
